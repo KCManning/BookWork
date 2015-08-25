@@ -5,7 +5,7 @@
 //	main
 //
 //-------------------------------------------------------------------------------------------------
-#include <iostream>
+
 #include "MainGame.h"
 
 
@@ -59,10 +59,6 @@ int main(int argc, char *argv[])
 	MainGame mainGame;
 
 	mainGame.run();
-
-	std::cout << "Press <Enter> to close" << std::endl;
-
-	std::cin.get();
 
 	return 0;
 }

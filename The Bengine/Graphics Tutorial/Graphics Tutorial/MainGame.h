@@ -15,6 +15,11 @@
 #include <SDL/SDL.h>
 #include <GLEW/glew.h>
 
+#include <iostream>//*** Included during testing.
+
+enum class GameState
+{PLAY,EXIT};
+
 //-------------------------------------------------------------------------------------------------
 //   Title: Main Game Class
 //   Description: The base class for the core portions of the game
@@ -44,13 +49,18 @@
 //       non-inline:
 //         MainGame() -- constructs the base game window
 //		   void run() -- calls each of the necessary functions to run the game
-//		   void initSystems() -- initializes the different functions required for operation
 // 
+//		  Private Methods:
+//		   void initSystems() -- initializes the different functions required for operation
+//			void gameLoop() -- Main loop for calling and using game logic
+//			void processInput() -- Handles user interaction with window
+//
 //        Private Properties
 //          SDL_Window* _window -- handle for the SDL Window
 //			int _screenWidth -- Width of window to be created
 //			int _screenHeight -- Height of window to be created
-//
+//			GameState _gamestate -- Used to determine if game is running or not
+//		
 //    Public Nested Structures:
 //      none
 //
@@ -67,17 +77,24 @@
 class MainGame
 {
 public:
+	//Constructors
 	MainGame();
+
 	~MainGame();
-
-
+	
+	//Methods
 	void run();
 
-	void initSystems();
-
 private:
+	//Methods
+	void initSystems();
+	void gameLoop();
+	void processInput();
+
+	//Properties
 	SDL_Window* _window;
 	int _screenWidth;
 	int _screenHeight;
+	GameState _gamestate;
 };
 
