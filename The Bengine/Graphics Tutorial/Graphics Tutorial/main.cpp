@@ -5,9 +5,9 @@
 //	main
 //
 //-------------------------------------------------------------------------------------------------
-#include <Windows.h>
-#include <SDL/SDL.h>
-#include <GLEW/glew.h>
+#include <iostream>
+#include "MainGame.h"
+
 
 //-------------------------------------------------------------------------------------------------
 //	Function: main()
@@ -56,8 +56,13 @@
 //-------------------------------------------------------------------------------------------------
 int main(int argc, char *argv[])
 {
+	MainGame mainGame;
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+	mainGame.run();
+
+	std::cout << "Press <Enter> to close" << std::endl;
+
+	std::cin.get();
 
 	return 0;
-};
+}
