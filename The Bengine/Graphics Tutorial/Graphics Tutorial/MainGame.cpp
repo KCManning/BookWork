@@ -4,13 +4,70 @@
 //	Class: MainGame
 //
 //	Functions:
+//	fatalError()
 //	MainGame()
 //	run()
 //	initSystems()
 //	gameLoop()
 //	processInput()
+//	drawGame()
+//
 //-------------------------------------------------------------------------------------------------
 #include "MainGame.h"
+
+//-------------------------------------------------------------------------------------------------
+//	Function: fatalError()
+//
+//	Title: Fatal Error
+//
+//	Description: 
+//	Displays the errors from various calls
+//
+//	Programmer(s):
+//	Kevin Manning
+//	(Based on Tutorial Series by Ben Arnold - https://www.youtube.com/user/makinggameswithben/)
+//
+//	Date: 8/25/2015
+//
+//	Version: 0.01
+//
+//	Testing Environment: 
+//		Hardware: Lenovo y50
+//
+//		Software: Windows 8.1
+//		Visual Studio 2015 Community Edition
+//
+//	Input: cin.get() -- user presses <Enter> to continue process (and thus exit)
+//
+//	Output: cout -- prints message to the console for user
+//
+//	Parameters:
+//	std::string errorString -- The error message to be displayed
+// 
+//
+//	Returns:
+//	none
+// 
+// 
+//	Called By: initSystems()
+// 
+//	Calls: none
+//
+//	History Log: 
+//	8/18/14 - BA - Uploaded Tutorial to Youtube
+//	8/25/15 - KM - Created inital structure of function
+// 
+//-------------------------------------------------------------------------------------------------
+void fatalError(std::string errorString)
+{
+	std::cout << errorString << std::endl;
+	std::cout << "Press <Enter> to quit";
+	std::cin.get();
+
+	SDL_QUIT; //Turbs SDL off
+	exit(1); //Forcibl exits the program
+
+}
 
 //-------------------------------------------------------------------------------------------------
 //	Function: MainGame()
@@ -210,6 +267,20 @@ void MainGame::initSystems()
 	SDL_Init(SDL_INIT_EVERYTHING);//initialize SDL
 
 	_window = SDL_CreateWindow("Bengine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_OPENGL);
+	if (_window == nullptr)
+		fatalError("SDL Window could not be created!");
+
+	SDL_GLContext glContext = SDL_GL_CreateContext(_window);
+	if (glContext == nullptr)
+		fatalError("SDL_GL context could not be created!");
+
+	GLenum error = glewInit();
+	if (error != GLEW_OK)//Can be configured to check for any errors GLEW returns
+		fatalError("Could not initialize GLEW");
+
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);//turns double buffering on
+
+	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);//Sets the "clear buffer" color. RGBA
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -261,6 +332,8 @@ void MainGame::gameLoop()
 	while (_gamestate != GameState::EXIT)
 	{
 		processInput();
+
+		drawGame();
 	}
 }
 
@@ -330,4 +403,72 @@ void MainGame::processInput()
 
 		}
 	}
+}
+
+//-------------------------------------------------------------------------------------------------
+//	Function: DrawGame
+//
+//	Title: Display Function
+//
+//	Description: 
+//	Displays the buffered information to the screen
+//
+//	Programmer(s):
+//	Kevin Manning
+//	(Based on Tutorial Series by Ben Arnold - https://www.youtube.com/user/makinggameswithben/)
+//
+//	Date: 8/25/2015
+//
+//	Version: 0.01
+//
+//	Testing Environment: 
+//		Hardware: Lenovo y50
+//
+//		Software: Windows 8.1
+//		Visual Studio 2015 Community Edition
+//
+//	Input:
+//		none
+//
+//	Output:
+//		glBegin()-glEnd() -- Pushes informations from the buffers to the screen
+//
+//	Parameters:
+//	none
+// 
+//
+//	Returns:
+//	none
+// 
+// 
+//	Called By: gameLoop()
+// 
+//	Calls:
+//
+//
+//	History Log: 
+//	8/22/14 - BA - Uploaded Tutorial to Youtube
+//	8/25/15 - KM - Created inital structure of function
+// 
+//-------------------------------------------------------------------------------------------------
+void MainGame::drawGame()
+{
+	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//Allows two variables to e used as one
+
+#pragma region Bad Practices
+	//What follows is 'Immediate OpenGL'.
+	//It is advised to NEVER use this; it exists here only for teaching purposes.
+	glEnableClientState(GL_COLOR_ARRAY);
+	glBegin(GL_TRIANGLES);
+
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex2f(0, 0);
+	glVertex2f(0, 500);
+	glVertex2f(500, 500);
+
+	glEnd();
+#pragma endregion
+
+	SDL_GL_SwapWindow(_window);//Pushes the buffer to the window
 }

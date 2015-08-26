@@ -14,6 +14,7 @@
 #include <Windows.h>
 #include <SDL/SDL.h>
 #include <GLEW/glew.h>
+#include <string>
 
 #include <iostream>//*** Included during testing.
 
@@ -90,6 +91,8 @@ private:
 	void initSystems();
 	void gameLoop();
 	void processInput();
+
+	void drawGame();
 
 	//Properties
 	SDL_Window* _window;
