@@ -449,6 +449,7 @@ void MainGame::processInput()
 //	History Log: 
 //	8/22/14 - BA - Uploaded Tutorial to Youtube
 //	8/25/15 - KM - Created inital structure of function
+//	8/26/15 - KM - Changed temporary tringle to account for "normalized device coordinates".
 // 
 //-------------------------------------------------------------------------------------------------
 void MainGame::drawGame()
@@ -463,9 +464,10 @@ void MainGame::drawGame()
 	glBegin(GL_TRIANGLES);
 
 	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex2f(-1, -1);
+	//In OpenGL, 0 is center of screen. Positive #s go go and right, negative go down and left
+	glVertex2f(0, -1);
 	glVertex2f(0, 0);
-	glVertex2f(0, 500);
-	glVertex2f(500, 500);
 
 	glEnd();
 #pragma endregion
