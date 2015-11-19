@@ -1,6 +1,8 @@
-C:\Users\Kevin\Documents\Projects\Phoneword\Phoneword\obj\Debug\assemblies\Phoneword.dll
-C:\Users\Kevin\Documents\Projects\Phoneword\Phoneword\obj\Debug\assemblies\Mono.Android.dll
-C:\Users\Kevin\Documents\Projects\Phoneword\Phoneword\obj\Debug\assemblies\mscorlib.dll
-C:\Users\Kevin\Documents\Projects\Phoneword\Phoneword\obj\Debug\assemblies\System.Core.dll
-C:\Users\Kevin\Documents\Projects\Phoneword\Phoneword\obj\Debug\assemblies\System.dll
-C:\Users\Kevin\Documents\Projects\Phoneword\Phoneword\obj\Debug\assemblies\System.Xml.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\Phoneword.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\Mono.Android.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\mscorlib.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\System.Core.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\System.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\System.Xml.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\System.Runtime.Serialization.dll
+C:\Users\Kevin\Documents\GitHub\BookWork\Xamarin\Xamarin Android\Phoneword\Phoneword\obj\Debug\assemblies\System.ServiceModel.Internals.dll
