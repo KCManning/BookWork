@@ -10,12 +10,12 @@ public class OpenGLES20Activity extends Activity
     private GLSurfaceView mGLView;
 
     @Override
-    public void OnCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         //Creates a GLSurfaceView instance and set it as the contentView
-        mGLView = new MyGlSurfaceView(this);
+        mGLView = new MyGLSurfaceView(this);
         setContentView(mGLView);
     }
 }
