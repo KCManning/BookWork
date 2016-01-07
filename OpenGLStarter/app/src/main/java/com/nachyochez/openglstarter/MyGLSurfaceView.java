@@ -1,4 +1,6 @@
 package com.nachyochez.openglstarter;
+import android.content.Context;
+import android.opengl.GLSurfaceView;
 
 /**
  * Created by Kevin on 1/7/2016.
