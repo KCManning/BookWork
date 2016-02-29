@@ -3,16 +3,11 @@ using System.Collections;
 
 public class LoseCollider : MonoBehaviour
 {
-    public Scene_Manager sm;
-
-    void OnCollisionEnter2D (Collision2D collision)
-    {
-        Debug.Log("Collision");
-    }
+   private Scene_Manager sm;
 
     void OnTriggerEnter2D (Collider2D collider)
     {
-        Debug.Log("Trigger");
+        sm = GameObject.FindObjectOfType<Scene_Manager>();
         sm.LoadScene("Lose");
     }
 }

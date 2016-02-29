@@ -2,14 +2,14 @@
 using System.Collections;
 
 public class Ball : MonoBehaviour {
-    public Paddle paddle;
+   private Paddle paddle;
 
     private Vector3 paddleToBallVector;
     private bool startGame;
 
 	// Use this for initialization
 	void Start () {
-
+        paddle = GameObject.FindObjectOfType<Paddle>();
         paddleToBallVector = this.transform.position - paddle.transform.position;
         startGame = false;
 
