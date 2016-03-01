@@ -35,7 +35,12 @@ public class Ball : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (startGame) { GetComponent<AudioSource>().Play(); }
+        if (startGame)
+        {
+            Vector3 tweak = new Vector3(Random.Range(0f, 0.2f), Random.Range(0f, 0.2f), 0f);
+            GetComponent<AudioSource>().Play();
+            GetComponent<Rigidbody>().velocity += tweak;
+        }
 
     }
 }//end Ball class
