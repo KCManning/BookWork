@@ -11,6 +11,8 @@ public class Brick : MonoBehaviour {
     public Sprite[] hitSprites;
     private bool isBreakable;
 
+    public GameObject smoke;
+
     public static int breakableCount;
 
 	// Use this for initialization
@@ -43,6 +45,10 @@ public class Brick : MonoBehaviour {
             breakableCount--;
             Debug.Log("Remaining brick: " + breakableCount);
             sm.BrickDestroyed();
+           GameObject smokePuff =  Instantiate(smoke, transform.position, Quaternion.identity) 
+                as GameObject;
+            smokePuff.GetComponent<ParticleSystem>().startColor = 
+                gameObject.GetComponent<SpriteRenderer>().color;
             Destroy(gameObject);
 
         }
