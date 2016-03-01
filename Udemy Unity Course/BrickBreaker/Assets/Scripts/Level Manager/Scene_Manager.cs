@@ -35,4 +35,13 @@ public class Scene_Manager : MonoBehaviour {
             LoadNextScene();
     }
 
+    public void BrickDestroyed()
+    {
+        if (Brick.breakableCount <= 0)
+        {
+            LoadNextScene();
+        }
+
+    }
+
 }

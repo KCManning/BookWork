@@ -32,4 +32,10 @@ public class Ball : MonoBehaviour {
             }//end if mouse
         }//end if startGame
     }//end update
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (startGame) { GetComponent<AudioSource>().Play(); }
+
+    }
 }//end Ball class

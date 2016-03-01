@@ -3,28 +3,61 @@ using System.Collections;
 
 public class Brick : MonoBehaviour {
 
-    public int maxHits;
+    //public int maxHits;
+    public AudioClip crack;
+
     private int timesHit;
+    private Scene_Manager sm;
+    public Sprite[] hitSprites;
+    private bool isBreakable;
+
+    public static int breakableCount;
 
 	// Use this for initialization
 	void Start () {
+        isBreakable = (this.tag == "Breakable");
+        if (isBreakable) { breakableCount++; }
         timesHit = 0;
-
-	}
+        sm = GameObject.FindObjectOfType<Scene_Manager>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
-        if(timesHit == maxHits)
-        {
 
-        }
 
-	}
+    }
 
-    void OnCollision2d(Collision2D col)
+    void LoadSprites()
+    {
+        int index = timesHit - 1;
+        if(hitSprites[index])
+            this.GetComponent<SpriteRenderer>().sprite = hitSprites[index];
+    }
+
+    void HandleHits()
     {
         timesHit++;
+        AudioSource.PlayClipAtPoint(crack, transform.position);
+        if (timesHit >= hitSprites.Length + 1)
+        { 
+            breakableCount--;
+            Debug.Log("Remaining brick: " + breakableCount);
+            sm.BrickDestroyed();
+            Destroy(gameObject);
+
+        }
+        else
+        {
+            LoadSprites();
+        }
+
+    }
+
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+       
+        if (isBreakable) { HandleHits(); }
 
     }
 

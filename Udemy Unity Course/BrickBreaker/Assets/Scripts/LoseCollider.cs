@@ -7,7 +7,11 @@ public class LoseCollider : MonoBehaviour
 
     void OnTriggerEnter2D (Collider2D collider)
     {
+        if (GameObject.FindObjectOfType<Brick>())
+            Brick.breakableCount = 0;
+
         sm = GameObject.FindObjectOfType<Scene_Manager>();
+
         sm.LoadScene("Lose");
     }
 }
