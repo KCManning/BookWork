@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     public GameObject beamPrefab;
+    public AudioClip fireSound;
+
     public float speed = 15.0f;
     public float padding = 1.0f;
     public float projectileSpeed = 2f;
@@ -57,10 +59,10 @@ public class PlayerController : MonoBehaviour {
 
     void Fire()
     {
-        Vector3 startPosition = transform.position + new Vector3(0, .7f, 0);
         GameObject beam = Instantiate(beamPrefab, transform.position,
                   Quaternion.identity) as GameObject;
         beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);
+        AudioSource.PlayClipAtPoint(fireSound, transform.position);
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -72,9 +74,16 @@ public class PlayerController : MonoBehaviour {
             missle.Hit();
             if (health <= damage)
             {
-                sk.Reset();
-                Destroy(gameObject);
+                Defeat();
             }
         }
     }
+
+    void Defeat()
+    {
+        LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        man.LoadLevel("Win Screen");
+        Destroy(gameObject);
+    }
+
 }

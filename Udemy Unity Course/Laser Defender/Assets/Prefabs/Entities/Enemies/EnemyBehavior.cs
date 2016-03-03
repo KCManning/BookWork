@@ -3,6 +3,9 @@ using System.Collections;
 
 public class EnemyBehavior : MonoBehaviour {
     public GameObject beamPrefab;
+    public AudioClip fireSound;
+    public AudioClip death;
+    
     public float health = 150f;
     public float damage = 0f;
     public float projectileSpeed = 2f;
@@ -26,6 +29,7 @@ public class EnemyBehavior : MonoBehaviour {
             missle.Hit();
             if (health <= damage)
             {
+                AudioSource.PlayClipAtPoint(death, transform.position);
                 sk.Score(scoreValue);
                 Destroy(gameObject);
             }
@@ -42,10 +46,11 @@ public class EnemyBehavior : MonoBehaviour {
 
     void Fire()
     {
-        Vector3 startPosition = transform.position + new Vector3(0, -0.7f, 0);
         GameObject beam = Instantiate(beamPrefab, transform.position,
                   Quaternion.identity) as GameObject;
         beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);
+        AudioSource.PlayClipAtPoint(fireSound, transform.position);
     }
+    
 
 }
