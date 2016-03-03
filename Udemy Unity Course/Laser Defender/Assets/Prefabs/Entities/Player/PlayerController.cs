@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour {
     public float health = 250f;
     public float damage = 0f;
 
+    private ScoreKeeper sk;
+
+
     float xmin;
     float xmax;
 
@@ -23,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 
         xmin = leftmost.x + padding;
         xmax = rightmost.x - padding;
-
+        sk = GameObject.Find("Score").GetComponent<ScoreKeeper>();
     }
 
     // Update is called once per frame
@@ -68,7 +71,10 @@ public class PlayerController : MonoBehaviour {
             damage += missle.GetDamage();
             missle.Hit();
             if (health <= damage)
+            {
+                sk.Reset();
                 Destroy(gameObject);
+            }
         }
     }
 }

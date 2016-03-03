@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public float speed = 2.0f;
     public float padding = 5.0f;
+    public float spawnDelay = .5f;
 
     float xmin;
     float xmax;
@@ -29,7 +30,19 @@ public class EnemySpawner : MonoBehaviour {
 
        
 
-        }	
+        }
+
+    Transform NextFreePosition()
+    {
+        foreach (Transform childPositionGameObject in transform)
+        {
+            if (childPositionGameObject.childCount == 0)
+                return childPositionGameObject;
+        }
+
+        return null;
+    }
+
 
     bool AllMembersDead()
     {
@@ -44,12 +57,19 @@ public class EnemySpawner : MonoBehaviour {
 
     void Spawn()
     {
-        foreach (Transform child in transform)
+        
+            Transform freePosition = NextFreePosition();
+        if (freePosition)
         {
-            GameObject enemy = Instantiate(enemyPrefab, child.transform.position,
+            GameObject enemy = Instantiate(enemyPrefab, freePosition.position,
                 Quaternion.identity) as GameObject;
-            enemy.transform.parent = child;
+            enemy.transform.parent = freePosition;
         }
+        if (NextFreePosition())
+        {
+            Invoke("Spawn", spawnDelay);
+        }
+       
 
     }
 
