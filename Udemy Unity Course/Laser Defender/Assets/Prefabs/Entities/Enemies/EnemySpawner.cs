@@ -25,21 +25,41 @@ public class EnemySpawner : MonoBehaviour {
         xmin = leftmost.x + padding;
         xmax = rightmost.x - padding;
 
-        foreach (Transform child in transform)
-            {
-                GameObject enemy = Instantiate(enemyPrefab, child.transform.position, 
-                    Quaternion.identity) as GameObject;
-                enemy.transform.parent = child;
-            }
+        Spawn();
+
+       
+
         }	
+
+    bool AllMembersDead()
+    {
+        foreach(Transform childPositionGameObject in transform)
+        {
+            if (childPositionGameObject.childCount > 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    void Spawn()
+    {
+        foreach (Transform child in transform)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, child.transform.position,
+                Quaternion.identity) as GameObject;
+            enemy.transform.parent = child;
+        }
+
+    }
 
     public void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 0));
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if(movingRight)
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
@@ -54,6 +74,11 @@ public class EnemySpawner : MonoBehaviour {
 
         if(rightEdgeOfFormation > xmax) { movingRight = false; }
         else if ( leftEdgeOfFormation < xmin) { movingRight = true; }
+
+        if (AllMembersDead())
+        {
+            Spawn();
+        }
 
         //float newX = Mathf.Clamp(transform.position.x, xmin, xmax);
         // transform.position = new Vector3(newX, transform.position.y, 0f);
